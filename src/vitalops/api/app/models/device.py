@@ -6,6 +6,7 @@ from sqlalchemy import DateTime, ForeignKey, String, func
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from vitalops.api.app.models.base import Base
+from vitalops.api.app.models.daily_metrics import FactDailyMetrics
 
 if TYPE_CHECKING:
     from vitalops.api.app.models.user import User
@@ -29,3 +30,6 @@ class Device(Base):
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )
     user: Mapped["User"] = relationship(back_populates="devices")
+    daily_metrics: Mapped[list["FactDailyMetrics"]] = relationship(
+        back_populates="devices"
+    )

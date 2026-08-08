@@ -7,6 +7,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from vitalops.api.app.models.base import Base
 from typing import TYPE_CHECKING
 
+from vitalops.api.app.models.daily_metrics import FactDailyMetrics
+
 if TYPE_CHECKING:
     from vitalops.api.app.models.device import Device
 
@@ -26,6 +28,9 @@ class User(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )
-    devices: Mapped[List["Devices"]] = relationship(
+    devices: Mapped[list["Device"]] = relationship(
         back_populates="user", cascade="all,delete-orphan"
+    )
+    daily_metrics: Mapped[list["FactDailyMetrics"]] = relationship(
+        back_populates="user"
     )

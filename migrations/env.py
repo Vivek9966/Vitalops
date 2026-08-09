@@ -9,6 +9,7 @@ from vitalops.api.app.models.user import User
 from vitalops.api.app.models.device import Device
 from vitalops.shared.config.settings import settings
 from vitalops.api.app.models.date import DateDimension
+from vitalops.api.app.models.sleep import FactSleep
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

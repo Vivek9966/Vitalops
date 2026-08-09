@@ -51,4 +51,4 @@ class FactDailyMetrics(Base):
     date_dimension: Mapped["DateDimension"] = relationship(
         back_populates="daily_metrics"
     )
-    devices: Mapped["Device | None"] = relationship(back_populates="daily_metrics")
+    device: Mapped["Device | None"] = relationship(back_populates="daily_metrics")

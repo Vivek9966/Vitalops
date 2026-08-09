@@ -1,3 +1,4 @@
+import re
 from urllib.parse import unquote_plus
 import uuid
 from datetime import date, datetime
@@ -6,10 +7,12 @@ from sqlalchemy import DateTime, ForeignKey, String, func
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from vitalops.api.app.models.base import Base
-from vitalops.api.app.models.daily_metrics import FactDailyMetrics
+# from vitalops.api.app.models.daily_metrics import FactDailyMetrics
 
 if TYPE_CHECKING:
     from vitalops.api.app.models.user import User
+    from vitalops.api.app.models.sleep import FactSleep
+    from vitalops.api.app.models.daily_metrics import FactDailyMetrics
 
 
 class Device(Base):
@@ -31,5 +34,6 @@ class Device(Base):
     )
     user: Mapped["User"] = relationship(back_populates="devices")
     daily_metrics: Mapped[list["FactDailyMetrics"]] = relationship(
-        back_populates="devices"
+        back_populates="device"
     )
+    sleep_records: Mapped[list["FactSleep"]] = relationship(back_populates="device")

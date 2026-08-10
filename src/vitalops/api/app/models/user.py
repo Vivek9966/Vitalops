@@ -12,6 +12,7 @@ from vitalops.api.app.models.daily_metrics import FactDailyMetrics
 if TYPE_CHECKING:
     from vitalops.api.app.models.device import Device
     from vitalops.api.app.models.sleep import FactSleep
+    from vitalops.api.app.models.workout import FactWorkout
 
 
 class User(Base):
@@ -36,3 +37,4 @@ class User(Base):
         back_populates="user"
     )
     sleep_records: Mapped[list["FactSleep"]] = relationship(back_populates="user")
+    workouts: Mapped[list["FactWorkout"]] = relationship(back_populates="user")

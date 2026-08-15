@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from vitalops.api.app.models.daily_metrics import FactDailyMetrics
     from vitalops.api.app.models.sleep import FactSleep
     from vitalops.api.app.models.workout import FactWorkout
+    from vitalops.api.app.models.features import DailyFeatures
 # test
 
 
@@ -34,5 +35,9 @@ class DateDimension(Base):
         back_populates="date_dimension"
     )
     workouts: Mapped[list["FactWorkout"]] = relationship(
+        back_populates="date_dimension"
+    )
+
+    feature_rows: Mapped[list["DailyFeatures"]] = relationship(
         back_populates="date_dimension"
     )

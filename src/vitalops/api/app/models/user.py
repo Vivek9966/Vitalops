@@ -13,6 +13,7 @@ if TYPE_CHECKING:
     from vitalops.api.app.models.device import Device
     from vitalops.api.app.models.sleep import FactSleep
     from vitalops.api.app.models.workout import FactWorkout
+    from vitalops.api.app.models.features import DailyFeatures
 
 
 class User(Base):
@@ -38,3 +39,5 @@ class User(Base):
     )
     sleep_records: Mapped[list["FactSleep"]] = relationship(back_populates="user")
     workouts: Mapped[list["FactWorkout"]] = relationship(back_populates="user")
+    features_rows: Mapped[list["DailyFeatures"]] = relationship(back_populates="user")
+    sleep_need_hours: Mapped[float | None] = mapped_column(Float, nullable=True)

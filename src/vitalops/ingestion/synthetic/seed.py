@@ -105,9 +105,10 @@ def seed(
                         name,
                         dob,
                         height_cm,
-                        weight_kg
+                        weight_kg,
+                        sleep_need_hours
                     )
-                    VALUES (%s, %s, %s, %s, %s)
+                    VALUES (%s, %s, %s, %s, %s,%s )
                     """,
                     (
                         user_id,
@@ -115,6 +116,7 @@ def seed(
                         dob,
                         baseline["height_cm"],
                         baseline["weight_kg"],
+                        baseline["sleep_need_hours"],
                     ),
                 )
 

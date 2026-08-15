@@ -53,7 +53,7 @@ daily AS (
         dm.hrv,
         dm.resting_heart_rate,
 
-        COALESCE(ds.sleep_hours, 0.0) AS sleep_hours,
+         ds.sleep_hours AS sleep_hours,
 
         COALESCE(dw.training_load, 0.0) AS training_load,
 
@@ -142,8 +142,12 @@ rolling AS (
         ) AS workout_days_7d,
 
         SUM(
-            sleep_need_hours - sleep_hours
-        ) OVER (
+            CASE 
+            WHEN sleep_hours IS NOT NULL
+            THEN sleep_need_hours - sleep_hours
+            ELSE 0.0
+            END 
+            ) OVER (
             PARTITION BY user_id
             ORDER BY date
             ROWS BETWEEN UNBOUNDED PRECEDING
